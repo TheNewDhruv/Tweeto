@@ -1,0 +1,54 @@
+<html lang="en" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- My Custom css for feel of real native App -->
+  <style type="text/css">
+              body, html
+              {
+                  margin: 0; padding: 0; height: 100%; overflow: hidden;
+              }
+              #noselect {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none;   /* Chrome/Safari/Opera */
+            -khtml-user-select: none;    /* Konqueror */
+            -moz-user-select: none;      /* Firefox */
+            -ms-user-select: none;       /* Internet Explorer/Edge */
+            user-select: none;           /* Non-prefixed version, currently
+                                    not supported by any browser */
+              }
+              #container {
+                height: 100%;
+              }
+
+          </style>
+
+</head>
+<body>
+
+
+
+  <!-- Embeding mobile twitter in a webview -->
+  <webview id="container" src="https://mobile.twitter.com/session/new" autosize="on"></webview>
+
+
+  <!-- Open Links In System Default Browser  -->
+  <script>
+  const {shell} = require('electron')
+  const webview = document.getElementById('container');
+  webview.addEventListener('new-window', (e) => {
+    const protocol = require('url').parse(e.url).protocol
+    if (protocol === 'http:' || protocol === 'https:') {
+      shell.openExternal(e.url)
+    }
+  });
+  </script>
+
+  <script type="text/javascript">
+    angular.module('BlankApp', ['ngMaterial']);
+  </script>
+</body>
+</html>
+
+<!--
+Copyright 2016 TheNewDhruv.com. All Rights Reserved.
+-->
